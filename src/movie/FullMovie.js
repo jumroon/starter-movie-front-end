@@ -8,7 +8,7 @@ import ErrorAlert from "../shared/ErrorAlert";
 
 function FullMovie() {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -30,8 +30,11 @@ function FullMovie() {
     { movie_id: movieId, review_id: reviewId },
     score
   ) {
-    console.log("score", reviewId, score);
     updateReview(reviewId, { score }).then(() => loadMovie(movieId));
+  }
+
+  if (!movie) {
+    return "loading....";
   }
 
   return (
